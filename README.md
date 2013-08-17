@@ -21,14 +21,19 @@ of your remaining events today, and when they are (automatically refreshed every
 __Add dates from selected text__: Simply select the text for your event and
 right-click to quickly add an event to your calendar.
 
+__Right-click to see today's events__: See today's events through a quick list,
+accessed through the right-click menu.
+
 ### Coming Soon!
 
 __Automatic detection of dates in the page__: Just click on the highlighted text
 to see what events you have on that date, or to add it as a new event to your
 calendar.
 
-__Right-click (context) menu__: See your upcoming events through a quick list, accessed
+__Right-click to see all events__: See your upcoming events through a quick list, accessed
 through the right-click menu.
+
+__Keyboard shortcuts from anywhere!__: Probably Vim-based, because Vim is the best.
 
 ## Tweaks
 

@@ -18,13 +18,41 @@
       });
 
       request.execute(function (response) {
-        var numberOfEvents = response.items.length;
+        var i, numberOfEvents = response.items.length;
         console.log("Events updated (" + numberOfEvents + " received)");
         // Update badge with number of events left today
         chrome.browserAction.setBadgeText({text: numberOfEvents.toString()});
 
-        // HACK? What"s the legit way to pass data to the pannel?
+        // HACKZ? What"s the legit way to pass data to the pannel?
         window.eventz = response.items;
+        // Context menu
+        if (window.hasOwnProperty("parentItemId")) {
+          // Clear old events
+          chrome.contextMenus.remove(window.parentItemId);
+        }
+        // Show upcoming events
+        if (window.eventz && window.eventz.length > 0) {
+          window.parentItemId = chrome.contextMenus.create({
+            type: "normal",
+            title: "Today's events",
+            contexts: ["all"]
+          });
+          // Children events
+          // TODO: Organise by month/day
+          for (i = 0; i < window.eventz.length; i += 1) {
+            var childItem = chrome.contextMenus.create({
+              type: "normal",
+              // TODO: Show start time details
+              title: window.eventz[i].summary,
+              contexts: ["all"],
+              parentId: window.parentItemId,
+              onclick: function (e) {
+                // TODO: Make click-able
+                console.log(e);
+              }
+            });
+          }
+        }
       });
     });
   };
@@ -94,10 +122,10 @@
   });
 
   // Context menu
-  // Add selection
+  // Quick add via selection
   chrome.contextMenus.create({
     type: "normal",
-    title: "Quick add '%s' as event",
+    title: "Add '%s' as event",
     contexts: ["selection"],
     onclick: function (e) {
       var text = e.selectionText;
