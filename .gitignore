@@ -4,5 +4,4 @@ temp
 dist
 .sass-cache
 app/bower_components
-app.pem
-app.crx
+app.*
