@@ -20,7 +20,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
       request.execute(function (response) {
         console.log(response);
 
-        window.eventies = response.items;
+        window.eventz = response.items;
       });
     });
   };
