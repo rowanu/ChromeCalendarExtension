@@ -9,9 +9,7 @@
     },
     "default_locale": "en",
     "background": {
-        "scripts": [
-            "scripts/background.js"
-        ]
+      "page": "background.html"
     },
   "browser_action": {
     "default_icon": {
@@ -22,7 +20,7 @@
     "default_popup": "popup.html"
   },
   "omnibox": {
-    "keyword": "ChromeCalendar"
+    "keyword": "cc"
   },
   "content_scripts": [
     {
@@ -40,9 +38,10 @@
       "all_frames": false
     }
   ],
-  "permissions": [
-    "tabs",
-    "http://*/*",
-    "https://*/*"
+  "permissions": [ "tabs",
+    "https://www.google.com/calendar/feeds/",
+   "https://www.google.com/accounts/OAuthGetRequestToken",
+   "https://www.google.com/accounts/OAuthAuthorizeToken",
+   "https://www.google.com/accounts/OAuthGetAccessToken"
   ]
 }
