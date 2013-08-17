@@ -1,10 +1,10 @@
 {
   "appName": {
-    "message": "ChromeCalendar",
-    "description": "The name of the application"
+    "message": "Chrome Calendar",
+    "description": "You'll never need the defaul Google Calendar again!"
   },
   "appDescription": {
-    "message": "My Chrome Extension",
-    "description": "The description of the application"
+    "message": "Chrome Calendar",
+    "description": "You'll never need the defaul Google Calendar again!"
   }
 }

@@ -83,6 +83,11 @@
     handleClientLoad();
   });
 
+
+  // Get events on startup
+  chrome.runtime.onStartup.addListener(function (details) {
+    updateEvents();
+  });
   // Check for new events periodically (5mins)
   window.setInterval(function () { updateEvents(); }, 300000);
 
