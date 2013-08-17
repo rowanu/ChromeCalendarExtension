@@ -7,3 +7,7 @@ html {
 body {
   min-width: 300px;
 }
+
+#retry {
+  text-align: center;
+}

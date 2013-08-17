@@ -1,5 +1,5 @@
 /*jslint indent: 2, vars: true, browser: true */
-/*globals chrome: false */
+/*globals chrome: false, moment: false */
 'use strict';
 
 // TODO: Use moment.js to format dates nicely
@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', function () {
   var i;
   var ul = document.createElement("ul");
   var backgroundPage = chrome.extension.getBackgroundPage();
-  var events = backgroundPage.eventz.map(function (i) { return i.summary + ": " + i.start.dateTime + " to " + i.end.dateTime; });
+  var events = backgroundPage.eventz.map(function (i) {
+    return i.summary + ": " + moment(i.start.dateTime).fromNow();
+  });
   for (i = 0; i < events.length; i += 1) {
     var li = document.createElement("li");
     li.innerText = events[i];

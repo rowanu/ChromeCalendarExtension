@@ -42,7 +42,11 @@
       "all_frames": false
     }
   ],
+  "web_accessible_resources": [
+    "images/icon-128.png"
+  ],
   "permissions": [ "tabs",
+    "notifications",
     "https://www.google.com/calendar/feeds/",
     "https://accounts.google.com/o/oauth2/token"
   ],
