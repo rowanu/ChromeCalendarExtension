@@ -10,6 +10,7 @@
     "default_locale": "en",
     "background": {
       "scripts": [
+        "scripts/moment.min.js",
         "scripts/background.js",
         "scripts/client.js"
       ]
