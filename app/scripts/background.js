@@ -17,7 +17,6 @@
         "timeMax": moment().endOf("day").toDate()
       });
 
-      // TODO: Refresh data periodically
       request.execute(function (response) {
         var numberOfEvents = response.items.length;
         console.log("Events updated (" + numberOfEvents + " received)");
@@ -44,7 +43,7 @@
     gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: true}, handleAuthResult);
   };
 
-  // Use a button to handle authentication the first time.
+  // Check auth on load
   var handleClientLoad = function () {
     gapi.client.setApiKey(apiKey);
     window.setTimeout(checkAuth, 1);
@@ -53,6 +52,9 @@
   chrome.runtime.onInstalled.addListener(function (details) {
     handleClientLoad();
   });
+
+  // Check for new events periodically (5mins)
+  window.setInterval(function () { updateEvents(); }, 300000);
 
   // Omnibox
   chrome.omnibox.setDefaultSuggestion({
