@@ -40,10 +40,12 @@
           // Children events
           // TODO: Organise by month/day
           for (i = 0; i < window.eventz.length; i += 1) {
+            var event = window.eventz[i];
+            var startMoment = moment(event.start.dateTime);
             var childItem = chrome.contextMenus.create({
               type: "normal",
               // TODO: Show start time details
-              title: window.eventz[i].summary,
+              title: window.eventz[i].summary + " @ " + startMoment.hours() + ":" + startMoment.minutes(),
               contexts: ["all"],
               parentId: window.parentItemId,
               onclick: function (e) {
