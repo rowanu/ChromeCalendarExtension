@@ -69,11 +69,17 @@
       request.execute(function (response) {
         // Notify of added
         // TODO: Handle errors (with generic message)
-        window.webkitNotifications.createNotification(
+        var notification = window.webkitNotifications.createNotification(
           "images/icon-128.png",
           "Event added!",
           "Added " + response.summary + " at " + moment(response.start.dateTime).calendar()
-        ).show();
+        );
+        notification.ondisplay = function (event) {
+          setTimeout(function () {
+            event.currentTarget.cancel();
+          }, 5000);
+        };
+        notification.show();
         updateEvents();
       });
     });
