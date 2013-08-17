@@ -9,14 +9,17 @@
     },
     "default_locale": "en",
     "background": {
-      "page": "background.html"
+      "scripts": [
+        "scripts/background.js",
+        "scripts/client.js"
+      ]
     },
   "browser_action": {
     "default_icon": {
       "19": "images/icon-19.png",
       "38": "images/icon-38.png"
     },
-    "default_title": "ChromeCalendar",
+    "default_title": "Chrome Calendar",
     "default_popup": "popup.html"
   },
   "omnibox": {
@@ -40,8 +43,7 @@
   ],
   "permissions": [ "tabs",
     "https://www.google.com/calendar/feeds/",
-   "https://www.google.com/accounts/OAuthGetRequestToken",
-   "https://www.google.com/accounts/OAuthAuthorizeToken",
-   "https://www.google.com/accounts/OAuthGetAccessToken"
-  ]
+    "https://accounts.google.com/o/oauth2/token"
+  ],
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'"
 }
