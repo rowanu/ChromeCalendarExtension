@@ -56,13 +56,10 @@
   // Check for new events periodically (5mins)
   window.setInterval(function () { updateEvents(); }, 300000);
 
-  // Omnibox
-  chrome.omnibox.setDefaultSuggestion({
-    "description": "<dim>Enter your event details</dim>"
-  });
-  chrome.omnibox.onInputEntered.addListener(function (text) {
+  // HELPERS
+  // Add event via quick add request
+  var addEvent = function (text) {
     console.log("Adding event: " + text);
-    // TODO: Check auth'd
     gapi.client.load("calendar", "v3", function () {
       var request = gapi.client.calendar.events.quickAdd({
         calendarId: "primary",
@@ -85,5 +82,27 @@
         updateEvents();
       });
     });
+  };
+
+  // Omnibox
+  chrome.omnibox.setDefaultSuggestion({
+    "description": "<dim>Enter your event details</dim>"
+  });
+  chrome.omnibox.onInputEntered.addListener(function (text) {
+    console.log("Adding event (omnibox): " + text);
+    addEvent(text);
+  });
+
+  // Context menu
+  // Add selection
+  chrome.contextMenus.create({
+    type: "normal",
+    title: "Quick add '%s' as event",
+    contexts: ["selection"],
+    onclick: function (e) {
+      var text = e.selectionText;
+      console.log("Adding event (context menu): " + text);
+      addEvent(text);
+    }
   });
 }());

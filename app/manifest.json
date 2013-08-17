@@ -47,6 +47,7 @@
   ],
   "permissions": [ "tabs",
     "notifications",
+    "contextMenus",
     "https://www.google.com/calendar/feeds/",
     "https://accounts.google.com/o/oauth2/token"
   ],
