@@ -47,9 +47,7 @@
   ],
   "permissions": [ "tabs",
     "notifications",
-    "contextMenus",
-    "https://www.google.com/calendar/feeds/",
-    "https://accounts.google.com/o/oauth2/token"
+    "contextMenus"
   ],
   "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'"
 }
