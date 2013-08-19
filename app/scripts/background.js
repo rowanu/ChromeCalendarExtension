@@ -47,11 +47,7 @@
               // TODO: Show start time details
               title: window.eventz[i].summary + " @ " + startMoment.hours() + ":" + startMoment.minutes(),
               contexts: ["all"],
-              parentId: window.parentItemId,
-              onclick: function (e) {
-                // TODO: Make click-able
-                console.log(e);
-              }
+              parentId: window.parentItemId
             });
           }
         }
@@ -60,6 +56,8 @@
   };
 
   var handleAuthResult = function (authResult) {
+    console.log("CHECKED");
+    console.log(authResult);
     if (authResult && !authResult.error) {
       console.log("Authenticated");
       updateEvents();
@@ -70,6 +68,7 @@
   };
 
   var checkAuth = function () {
+    console.log("CHECKING");
     gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: true}, handleAuthResult);
   };
 
@@ -79,15 +78,14 @@
     window.setTimeout(checkAuth, 1);
   };
 
-  chrome.runtime.onInstalled.addListener(function (details) {
+  chrome.runtime.onStartup.addListener(function (details) {
     handleClientLoad();
   });
 
-
-  // Get events on startup
-  chrome.runtime.onStartup.addListener(function (details) {
-    updateEvents();
+  chrome.runtime.onInstalled.addListener(function (details) {
+    gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, handleAuthResult);
   });
+
   // Check for new events periodically (5mins)
   window.setInterval(function () { updateEvents(); }, 300000);
 

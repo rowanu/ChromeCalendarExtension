@@ -2,6 +2,8 @@
 
 A better Chrome Extension for managing your Google Calendar.
 
+Created at [HackMTL 2013](http://montrealtechwatch.com/2013/08/19/hackmtl-140-developers-36-projects-24-hours-hackathon-at-the-olympic-stadium/).
+
 ## Goal
 
 To never have to visit the default [Google
