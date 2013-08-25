@@ -30,7 +30,32 @@
       });
     });
   };
-
+  // Add event via quick add request
+  var addEvent = function (text) {
+    console.log("Adding event: " + text);
+    gapi.client.load("calendar", "v3", function () {
+      var request = gapi.client.calendar.events.quickAdd({
+        calendarId: "primary",
+        text: text
+      });
+      request.execute(function (response) {
+        // Notify of added
+        // TODO: Handle errors (with generic message)
+        var notification = window.webkitNotifications.createNotification(
+          "images/icon-128.png",
+          "Event added!",
+          "Added " + response.summary + " at " + moment(response.start.dateTime).calendar()
+        );
+        notification.ondisplay = function (event) {
+          setTimeout(function () {
+            event.currentTarget.cancel();
+          }, 5000);
+        };
+        notification.show();
+        getEvents();
+      });
+    });
+  };
   var checkAuthorization = function (immediate, callback) {
     console.log("Checking authorization (" + immediate + ")");
     gapi.auth.authorize({
@@ -58,5 +83,13 @@
   chrome.runtime.onInstalled.addListener(function () {
     console.log("EVENT: Installed");
     checkAuthorization(true, getEvents);
+  });
+  // Omnibox
+  chrome.omnibox.setDefaultSuggestion({
+    "description": "<dim>Enter your event details</dim>"
+  });
+  chrome.omnibox.onInputEntered.addListener(function (text) {
+    console.log("Adding event (omnibox): " + text);
+    addEvent(text);
   });
 }());
