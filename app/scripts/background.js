@@ -19,14 +19,14 @@
         timeMax: moment().endOf("day").toDate()
       });
       request.execute(function (response) {
-        var numberOfEvents = response.hasOwnProperty("items") ? response.items.length : "0";
+        var numberOfEvents = response.hasOwnProperty("items") ? response.items.length : 0;
         console.log("Events updated (" + numberOfEvents + " received)");
         _.each(response.items, function (e, i) {
           console.log(i + ": " + e.summary + " (" + e.status + ")");
-          console.log(e);
+          // console.log(e);
         });
         // Update badge with number of events left today
-        chrome.browserAction.setBadgeText({text: numberOfEvents.toString()});
+        chrome.browserAction.setBadgeText({text: (numberOfEvents > 0) ? numberOfEvents.toString() : "" });
       });
     });
   };
