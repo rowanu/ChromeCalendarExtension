@@ -11,8 +11,8 @@
     "background": {
       "scripts": [
         "scripts/client.js",
-        "bower_components/momentjs/moment.js",
-        "bower_components/underscore/underscore.js",
+        "libs/momentjs/moment.js",
+        "libs/underscore/underscore.js",
         "scripts/background.js"
       ]
     },
