@@ -5,6 +5,8 @@
   var clientId = "750882903724";
   var apiKey = "AIzaSyAbnPzMTh67tqb0G7A0dLlaLy_QkHX_2L4";
   var scopes = "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.readonly";
+  // Placeholder badge value while updating
+  chrome.browserAction.setBadgeText({text: "..."});
 
   var getEvents = function () {
     console.log("Getting events");
