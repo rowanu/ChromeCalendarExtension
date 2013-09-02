@@ -5,6 +5,9 @@
   var clientId = "750882903724";
   var apiKey = "AIzaSyAbnPzMTh67tqb0G7A0dLlaLy_QkHX_2L4";
   var scopes = "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.readonly";
+  // ChromeCalendar container and defaults
+  var cc = document.cc = {};
+  document.cc.authenticated = false;
   // Placeholder badge value while updating
   chrome.browserAction.setBadgeText({text: "..."});
 
@@ -68,6 +71,7 @@
       if (token && !token.error) {
         console.log("Authenticated");
         gapi.client.setApiKey(apiKey);
+        document.cc.authenticated = true;
         callback();
       } else {
         console.log("Uh oh... Not authenticated");
@@ -77,14 +81,18 @@
     });
   };
 
-  // Event listeners
+  // Event Listeners
   chrome.runtime.onStartup.addListener(function () {
-    console.log("EVENT: Startup");
     checkAuthorization(true, getEvents);
   });
   chrome.runtime.onInstalled.addListener(function () {
-    console.log("EVENT: Installed");
     checkAuthorization(true, getEvents);
+  });
+  // Message Listeners
+  chrome.runtime.onMessage.addListener(function (request, sender, responder) {
+    if (request.authCheck) {
+      responder(cc.authenticated);
+    }
   });
   // Omnibox
   chrome.omnibox.setDefaultSuggestion({

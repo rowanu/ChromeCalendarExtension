@@ -1,20 +1,12 @@
 /*jslint indent: 2, vars: true, browser: true */
 /*globals chrome: false, moment: false */
 'use strict';
-
-// TODO: Use moment.js to format dates nicely
 document.addEventListener('DOMContentLoaded', function () {
-  var i;
-  var ul = document.createElement("ul");
-  var backgroundPage = chrome.extension.getBackgroundPage();
-  var events = backgroundPage.eventz.map(function (i) {
-    return i.summary + ": " + moment(i.start.dateTime).fromNow();
+  chrome.runtime.sendMessage({authCheck: true}, function (authenticated) {
+    if (authenticated) {
+      // Remove loading spinner
+      document.getElementById("loading").remove();
+      // TODO: Show calendar (using D3.js)
+    }
   });
-  for (i = 0; i < events.length; i += 1) {
-    var li = document.createElement("li");
-    li.innerText = events[i];
-    ul.appendChild(li);
-  }
-  document.body.appendChild(ul);
-  document.body.removeChild(document.getElementById("retry"));
 });
